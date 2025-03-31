@@ -1,0 +1,70 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Lectures API",
+    "version": "1.0.0",
+    "description": "API לניהול הרצאות עם דפדוף (Pagination)"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local server"
+    }
+  ],
+  "paths": {
+    "/lectures": {
+      "get": {
+        "summary": "קבלת כל ההרצאות עם דפדוף",
+        "description": "מחזיר רשימת הרצאות עם אפשרות לדפדוף (Pagination)",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "מספר העמוד (ברירת מחדל: 1)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "רשימת הרצאות עם מידע על עמודים",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "currentPage": { "type": "integer", "example": 1 },
+                    "totalPages": { "type": "integer", "example": 20 },
+                    "totalLectures": { "type": "integer", "example": 1000 },
+                    "perPage": { "type": "integer", "example": 50 },
+                    "lectures": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Lecture"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Lecture": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string", "example": "Math 101" },
+          "speaker": { "type": "string", "example": "Dr. John Doe" },
+          "duration": { "type": "integer", "example": 60 }
+        }
+      }
+    }
+  }
+}

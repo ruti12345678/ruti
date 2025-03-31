@@ -1,0 +1,30 @@
+# version: "3.8"
+services:
+  lectures-app:
+    image: gill1967/lectures-app:1.0.0 # גרסה ספציפית
+    depends_on:
+      - mongo
+    ports:
+      - "3000:3000"
+
+
+
+# services:
+#   lectures-app:
+#     image: gill1967/lectures-app
+#     # build:
+#     #   context: .
+#     #   dockerfile: Dockerfile
+#     depends_on:
+#       - mongo
+#     ports:
+#       - "3000:3000"
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    # volumes:
+    #   - ./data:/data/db
+    command: [ "sh", "-c", "npm install && npm start" ]
