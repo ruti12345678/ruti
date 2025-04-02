@@ -138,11 +138,16 @@ app.get('/lectures', async (req, res) => {
   }
 });
 
+app.get('/_/health_check', async (req, res) => {
+  res.status(200).json("healthy")
+})
+
 
 // עדכון הרצאה לפי מזהה (Update)
 app.put('/lectures/:id', async (req, res) => {
   const { id } = req.params;
   const { title, speaker, duration } = req.body;
+
 
   try {
     const updatedLecture = await Lecture.findByIdAndUpdate(id, { title, speaker, duration }, { new: true });

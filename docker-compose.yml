@@ -1,30 +1,51 @@
-# version: "3.8"
-services:
-  lectures-app:
-    image: gill1967/lectures-app:1.0.0 # גרסה ספציפית
+  version: "3.8"
+  services:
+   lectures-app:
+    image: lecture-by-ruti:1.0.0 # גרסה ספציפית
     depends_on:
       - mongo
     ports:
       - "3000:3000"
 
+#   services:
+#     app:
+#       image: gill1967/lectures-app
+#       # build:
+#       #   context: .
+#       #   dockerfile: Dockerfile
+#       depends_on:
+#         - mongo
+#       ports:
+#         - "3000:3000"
+#       environment:
+#       - MONGODB_URI=mongodb://mongo:27017
 
+
+
+# #   mongo:
+# #     image: mongo:latest
+# #     container_name: mongo
+# #     ports:
+# #       - "27017:27017"
+# #     volumes:
+# #       - ./data:/data/db
+# #     # command: [ "sh", "-c", "npm install && npm start" ]
+# version: "3.8"
 
 # services:
 #   lectures-app:
 #     image: gill1967/lectures-app
-#     # build:
-#     #   context: .
-#     #   dockerfile: Dockerfile
 #     depends_on:
 #       - mongo
 #     ports:
 #       - "3000:3000"
+#     environment:
+#       - MONGODB_URI=mongodb://mongo:27017
 
-  mongo:
-    image: mongo:latest
-    container_name: mongo
-    ports:
-      - "27017:27017"
-    # volumes:
-    #   - ./data:/data/db
-    command: [ "sh", "-c", "npm install && npm start" ]
+#   mongo:
+#     image: mongo:latest
+#     container_name: mongo
+#     ports:
+#       - "27017:27017"
+#     volumes:
+#       - ./data:/data/db
